@@ -1,15 +1,13 @@
-var express = require("express");
-var exphbs = require("express-handlebars");
+module.exports = function (app) {
 
-var router = express.Router();
-
-router.get("/", (req, res) => {
+app.get("/", (req, res) => {
   res.render("index");
 });
 
-// router.get("/saved", (req, res) => {
-// 	res.render("saved");
-// });
+app.get("/saved", (req, res) => {
+	res.render("saved");
+});
 
-module.exports = router;
+};
+
 

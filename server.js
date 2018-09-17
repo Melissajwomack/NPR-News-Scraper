@@ -12,30 +12,35 @@ var request = require("request");
 var Comment = require("./models/Comment.js");
 var Article = require("./models/Article.js");
 
-// Routing controllers
-var htmlController = require("./routes/html-routes.js");
-var articleController = require("./routes/article-routes.js");
+// Routes
+require("./routes/html-routes.js")(app);
+require("./routes/article-routes.js")(app);
+require("./routes/saved-articles-routes.js")(app);
 
 //Initialize express
 var port = process.env.PORT || 3000;
 var app = express();
 
-app.use(express.static("public"));
-
-//Use body parser
+//Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
 }));
+app.use(express.static("public"));
 
-// Routing
-app.use("/", htmlController);
-app.use("/", articleController);
+// Handlebars
+app.engine(
+    "handlebars",
+    exphbs({
+        defaultLayout: "main"
+    })
+);
+app.set("view engine", "handlebars");
 
 //DB config
 var dbURI = "mongodb://127.0.0.1:27017/mongoHeadlines";
 
-if(process.env.MONGODB_URI) {
+if (process.env.MONGODB_URI) {
     mongoose.connect(process.env.MONGODB_URI);
 }
 else {

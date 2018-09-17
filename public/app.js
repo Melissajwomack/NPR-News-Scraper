@@ -11,3 +11,14 @@ M.AutoInit();
 //         draggable: true
 //     });
 // });
+
+$(document).ready(function () {
+    var API = {
+        getArticles: function () {
+            $.ajax({
+                url: "/scrape",
+                type: "GET"
+            });
+        }
+    };
+});

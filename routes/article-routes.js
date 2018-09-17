@@ -1,62 +1,72 @@
-var express = require("express");
 var request = require("request");
 var cheerio = require("cheerio");
 var Comment = require("../models/Comment.js");
 var Article = require("../models/Article.js");
-var router = express.Router();
 
-//Scrape data from NPR
-router.get("/scrape", function (req, res) {
-    request("http://www.npr.org/sections/news/", function (error, response, html) {
+module.exports = function (app) {
 
-        var $ = cheerio.load(html);
+    //Scrape data from NPR
+    app.get("/scrape", function (req, res) {
+        request("http://www.npr.org/sections/news/", function (error, response, html) {
 
-        $("article.item").each(function (i, element) {
+            var $ = cheerio.load(html);
 
-            var result = {};
+            $("article.item").each(function (i, element) {
 
-            result.title = $(element).children("div.item-info").children("h2.title").children("a").text();
-            console.log(result.title);
+                var result = {};
 
-            result.description = $(element).children("div.item-info").children("p.teaser").children("a").text();
-            console.log(result.description);
+                result.title = $(element).children("div.item-info").children("h2.title").children("a").text();
+                console.log(result.title);
 
-            result.link = $(element).children("div.item-info").children("h2.title").children("a").attr("href");
-            console.log(result.link);
+                result.description = $(element).children("div.item-info").children("p.teaser").children("a").text();
+                console.log(result.description);
 
-            result.photo = $(element).children("div.item-image").children("div.image-wrap").children("a").children("img").attr("src");
-            console.log(result.photo);
+                result.link = $(element).children("div.item-info").children("h2.title").children("a").attr("href");
+                console.log(result.link);
 
-            var newArticle = new Article(result);
+                result.photo = $(element).children("div.item-image").children("div.image-wrap").children("a").children("img").attr("src");
+                console.log(result.photo);
 
-            newArticle.save(function (err, doc) {
+                var newArticle = new Article(result);
 
-                // Log any errors
-                if (err) {
-                    console.log(err);
-                }
-                // Or log the doc
-                else {
-                    console.log(doc);
-                }
+                newArticle.save(function (err, doc) {
+
+                    // Log any errors
+                    if (err) {
+                        console.log(err);
+                    }
+                    // Or log the doc
+                    else {
+                        console.log(doc);
+                    }
+                });
             });
+            res.redirect("/all");
         });
-        res.redirect("/all");
     });
-});
 
-//Gets scraped data in database
-app.get("/articles", function (req, res) {
-    Article.find({}, function (error, found) {
-        if (error) {
-            console.log(error);
-        }
-        else {
-            res.json(found);
-        }
+    //Gets scraped data in database
+    app.get("/articles", function (req, res) {
+        Article.find({}, function (error, found) {
+            if (error) {
+                console.log(error);
+            }
+            else {
+                res.json(found);
+            }
+        });
     });
-});
 
+    //Sets saved to true for article
+    app.post("/save/:id", function (req, res) {
+        Article.findOneAndUpdate({ "_id": req.params.id }, { "saved": true }, function (error, found) {
+            if (error) {
+                console.log(error);
+            }
+            else {
+                console.log("Changed: ", found)
+            }
+        });
+    });
 
-
-module.exports = router;
+};
