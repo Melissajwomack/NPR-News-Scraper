@@ -34,13 +34,22 @@ app.use("/", htmlController);
 app.use("/", articleController);
 
 //DB config
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/mongoHeadlines";
-mongoose.connect(MONGODB_URI);
-mongoose.Promise = Promise;
+var dbURI = "mongodb://127.0.0.1:27017/mongoHeadlines";
+
+if(process.end.MONGODB_URI) {
+    mongoose.connect(process.env.MONGODB_URI);
+}
+else {
+    mongoose.connect(dbURI)
+}
+
+//Grab mongoose db
 var db = mongoose.connection;
 
+//Shows errors
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
+//Shows mongoose has connection
 db.once("open", function () {
     console.log("Mongoose connection successful.");
 });
