@@ -1,11 +1,15 @@
-//Displays JSON of scraped data in database
-app.get("/all", function (req, res) {
-    db.scrapedData.find({}, function (error, found) {
-        if (error) {
-            console.log(error);
-        }
-        else {
-            res.json(found);
-        }
-    });
+var express = require("express");
+var exphbs = require("express-handlebars");
+
+var router = express.Router();
+
+router.get("/", (req, res) => {
+  res.render("index");
 });
+
+// router.get("/saved", (req, res) => {
+// 	res.render("saved");
+// });
+
+module.exports = router;
+

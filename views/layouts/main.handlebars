@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>News Stance</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Materialize Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/public/style.css" />
+</head>
+
+<body>
+    <header id="top">
+        <!-- Large screen top nav bar -->
+        <nav>
+            <div class="nav-wrapper nav">
+                <a href="#home" class="brand-logo">News Stance</a>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li class="active"><a href="/">Home</a></li>
+                    <li class="active"><a href="#">Saved Articles</a></li>
+                    <li class="active"><a class="waves-effect btn">Scrape Articles</a></li>
+                    <li class="active"><a class="waves-effect btn">Clear Articles</a></li>
+                </ul>
+            </div>
+        </nav>
+        <!-- Side bar for small screen -->
+        <ul class="sidenav" id="mobile-demo">
+            <li class="active"><a href="/">Home</a></li>
+            <li class="active"><a href="#">Saved Articles</a></li>
+            <li class="active"><a class="waves-effect btn">Scrape Articles</a></li>
+            <li class="active"><a class="waves-effect btn">Clear Articles</a></li>
+        </ul>
+    </header>
+    <main>
+        <p>Hello World!</p>
+        {{{body}}}
+    </main>
+    <footer class="page-footer center">
+        <p> &copy; 2018 News Stance </p>
+    </footer>
+    <!-- JS -->
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <!-- Materialize JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+    <!-- app.js -->
+    <script src="/public/app.js"></script>
+</body>
+
+</html>

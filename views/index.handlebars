@@ -1,0 +1,11 @@
+<ul class="collection">
+    {{#each data}}
+    <li class="collection-item avatar">
+      <img src="{{this.photo}}" alt="Article Photo" class="circle">
+      <span class="title">{{this.title}}</span>
+      <p>{{this.description}} <br>
+         <a href="{{this.link}}">See Article</a>
+      </p>
+      <a href="#!" class="secondary-content"><i class="material-icons">add circle</i>Save to Favorites</a>
+    </li>
+</ul>

@@ -13,9 +13,8 @@ var Comment = require("./models/Comment.js");
 var Article = require("./models/Article.js");
 
 // Routing controllers
-var htmlController = require("./controllers/html-routes.js");
-var articleController = require("./controllers/article-routes.js");
-
+var htmlController = require("./routes/html-routes.js");
+var articleController = require("./routes/article-routes.js");
 
 //Initialize express
 var port = process.env.PORT || 3000;
@@ -36,7 +35,7 @@ app.use("/", articleController);
 //DB config
 var dbURI = "mongodb://127.0.0.1:27017/mongoHeadlines";
 
-if(process.end.MONGODB_URI) {
+if(process.env.MONGODB_URI) {
     mongoose.connect(process.env.MONGODB_URI);
 }
 else {

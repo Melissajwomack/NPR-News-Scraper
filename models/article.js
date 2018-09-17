@@ -13,10 +13,13 @@ var ArticleSchema = new Schema({
         required: true,
         unique: true
     },
-    Link: {
+    link: {
         type: String,
         required: true,
         unique: true
+    },
+    photo: {
+        type: String
     },
     saved: {
         type: Boolean,
