@@ -10,7 +10,7 @@
     <!-- Materialize CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
     <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="/public/style.css" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 
 <body>
@@ -22,23 +22,32 @@
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li class="active"><a href="/">Home</a></li>
-                    <li class="active"><a href="#">Saved Articles</a></li>
-                    <li class="active"><a class="waves-effect btn">Scrape Articles</a></li>
-                    <li class="active"><a class="waves-effect btn">Clear Articles</a></li>
+                    <li class="active"><a href="/saved">Saved Articles</a></li>
+                    <li class="active"><a class="waves-effect btn scrapeBtn" href="/scrape">Scrape Articles</a></li>
+                    <li class="active"><a class="waves-effect btn clearBtn">Clear All Articles</a></li>
                 </ul>
             </div>
         </nav>
         <!-- Side bar for small screen -->
         <ul class="sidenav" id="mobile-demo">
             <li class="active"><a href="/">Home</a></li>
-            <li class="active"><a href="#">Saved Articles</a></li>
-            <li class="active"><a class="waves-effect btn">Scrape Articles</a></li>
-            <li class="active"><a class="waves-effect btn">Clear Articles</a></li>
+            <li class="active"><a href="/saved">Saved Articles</a></li>
+            <li class="active"><a class="waves-effect btn scrapeBtn" href="/scrape">Scrape Articles</a></li>
+            <li class="active"><a class="waves-effect btn clearBtn">Clear All Articles</a></li>
         </ul>
     </header>
     <main>
-        <p>Hello World!</p>
         {{{body}}}
+        <!-- Modal Saved -->
+        <div id="modal1" class="modal">
+            <div class="modal-content">
+                <h4>Article Saved!</h4>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Okay</a>
+            </div>
+        </div>
+
     </main>
     <footer class="page-footer center">
         <p> &copy; 2018 News Stance </p>
@@ -50,7 +59,7 @@
     <!-- Materialize JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
     <!-- app.js -->
-    <script src="/public/app.js"></script>
+    <script src="app.js"></script>
 </body>
 
 </html>

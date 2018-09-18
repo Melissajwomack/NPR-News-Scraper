@@ -1,11 +1,52 @@
-<ul class="collection">
-    {{#each data}}
-    <li class="collection-item avatar">
-      <img src="{{this.photo}}" alt="Article Photo" class="circle">
-      <span class="title">{{this.title}}</span>
-      <p>{{this.description}} <br>
-         <a href="{{this.link}}">See Article</a>
-      </p>
-      <a href="#!" class="secondary-content"><i class="material-icons">add circle</i>Save to Favorites</a>
-    </li>
-</ul>
+{{#if data}}
+
+<div class="row">
+  {{#each data}}
+  <div class="col s12  m4 l3">
+    <div class="card" style="height:546px">
+      <div class="card-image">
+        <img src="{{this.photo}}">
+      </div>
+      <div class="card-content">
+        <h5>{{this.title}}</h5>
+        <p>{{this.description}}</p>
+
+        <!-- Link Icon -->
+        <a href="{{this.link}}" class="btn-floating waves-effect waves-light" target="__blank"><i class="material-icons">insert_link</i>
+        </a>
+        <!-- Comments Modal Trigger -->
+        <a class="btn-floating waves-effect waves-light btn modal-trigger commentBtn" href="#modal3"><i class="material-icons">insert_comment</i></a>
+
+        <!-- Save Icon -->
+        <a class="btn-floating waves-effect waves-light red saveBtn" data-id="{{this.id}}"><i class="material-icons">add</i></a>
+
+        <!-- Comments Modal Structure -->
+        <div id="modal3" class="modal">
+          <div class="modal-content">
+            <h4>{{this.title}}</h4>
+            <p>{{this.comments.comment}}</p>
+            <!-- Remove Comment Button -->
+            <a class="btn-floating waves-effect waves-light red saveCommentBtn" data-id="{{this.id}}"><i class="material-icons">close</i></a>
+          </div>
+
+          <div class="modal-footer">
+            
+            <!-- Save Comment Button -->
+            <a class="btn-floating waves-effect waves-light red saveCommentBtn" data-id="{{this.id}}"><i class="material-icons">add</i></a>
+
+            <!-- Close Modal Button -->
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Done</a>
+
+            <textarea id="new-comment-field"></textarea>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  {{/each}}
+</div>
+
+{{else}}
+<h1>No Articles Availible!</h1>
+{{/if}}

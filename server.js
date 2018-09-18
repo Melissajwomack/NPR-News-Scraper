@@ -12,14 +12,13 @@ var request = require("request");
 var Comment = require("./models/Comment.js");
 var Article = require("./models/Article.js");
 
-// Routes
-require("./routes/html-routes.js")(app);
-require("./routes/article-routes.js")(app);
-require("./routes/saved-articles-routes.js")(app);
-
 //Initialize express
 var port = process.env.PORT || 3000;
 var app = express();
+
+// Routes
+var routes = require("./routes/article-routes.js");
+app.use("/", routes);
 
 //Middleware
 app.use(bodyParser.json());

@@ -1,72 +1,162 @@
+var express = require('express');
+var router = express.Router();
 var request = require("request");
 var cheerio = require("cheerio");
 var Comment = require("../models/Comment.js");
 var Article = require("../models/Article.js");
 
-module.exports = function (app) {
 
-    //Scrape data from NPR
-    app.get("/scrape", function (req, res) {
-        request("http://www.npr.org/sections/news/", function (error, response, html) {
+//Scrape data from NPR
+router.get("/scrape", function (req, res) {
+    request("http://www.npr.org/sections/news/", function (error, response, html) {
 
-            var $ = cheerio.load(html);
+        var $ = cheerio.load(html);
 
-            $("article.item").each(function (i, element) {
+        $("article.item").each(function (i, element) {
 
-                var result = {};
+            var result = {};
 
-                result.title = $(element).children("div.item-info").children("h2.title").children("a").text();
-                console.log(result.title);
+            result.title = $(element).children("div.item-info").children("h2.title").children("a").text();
 
-                result.description = $(element).children("div.item-info").children("p.teaser").children("a").text();
-                console.log(result.description);
+            result.description = $(element).children("div.item-info").children("p.teaser").children("a").text();
 
-                result.link = $(element).children("div.item-info").children("h2.title").children("a").attr("href");
-                console.log(result.link);
+            result.link = $(element).children("div.item-info").children("h2.title").children("a").attr("href");
 
-                result.photo = $(element).children("div.item-image").children("div.image-wrap").children("a").children("img").attr("src");
-                console.log(result.photo);
+            result.photo = $(element).children("div.item-image").children("div.imagewrap").children("a").children("img").attr("src");
 
-                var newArticle = new Article(result);
+            var newArticle = new Article(result);
 
-                newArticle.save(function (err, doc) {
+            newArticle.save(function (err, inserted) {
 
-                    // Log any errors
-                    if (err) {
-                        console.log(err);
-                    }
-                    // Or log the doc
-                    else {
-                        console.log(doc);
-                    }
-                });
+                // Log any errors
+                if (err) {
+                    console.log(err);
+                }
+                // Or log the doc
+                else {
+                    console.log(inserted);
+                }
             });
-            res.redirect("/all");
         });
+        res.redirect("/");
     });
+});
 
-    //Gets scraped data in database
-    app.get("/articles", function (req, res) {
-        Article.find({}, function (error, found) {
-            if (error) {
-                console.log(error);
+//Render data from database on index page
+router.get("/", (req, res) => {
+    Article.find({})
+    .populate("comments")
+    .exec(function (error, found) {
+        if (error) {
+            console.log(error);
+        }
+        else {
+            res.render("index", {
+                data: found
+            });
+        }
+    });
+});
+
+//Clear database off all articles
+router.delete("/delete", (req, res) => {
+    Article.remove({}, function (error) {
+        if (error) {
+            console.log(error);
+        }
+        else {
+            console.log("Removed all articles from database!");
+        }
+    })
+})
+
+//Render saved articles on saved page
+router.get("/saved", (req, res) => {
+    Article.find({ saved: true }, function (error, found) {
+        if (error) {
+            console.log(error);
+        }
+        else {
+            res.render("saved", {
+                data: found
+            });
+        }
+    });
+});
+
+
+//Sets saved to true for article
+router.post("/save/:id", function (req, res) {
+    Article.findOneAndUpdate({ _id: req.params.id }, { saved: true }, { new: true }, function (err, data) {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            console.log("Changed: ", data)
+        }
+    });
+});
+
+//Sets saved to false for article
+router.post("/removesaved/:id", function (req, res) {
+    Article.findOneAndUpdate({ _id: req.params.id }, { saved: false }, { new: true }, function (err, data) {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            console.log("Changed: ", data)
+        }
+    });
+});
+
+
+//** COMMENTS **//
+
+//Get article comments by ObjectId
+router.get("/articles/:id", function (req, res) {
+    Article.findOne({ _id: req.params.id }).populate("comments").exec(function (error, doc) {
+        if (error) {
+            console.log(error);
+        }
+        else {
+            res.json(doc);
+        }
+    });
+});
+
+//Make a new comment
+router.post("/comment/:id", function (req, res) {
+    var newComment = new Comment(req.body.comment);
+    newComment.save(function (error, newComment) {
+        if (error) {
+            console.log(error);
+        }
+        else {
+            Article.findOneAndUpdate({ _id: req.params.id }, { $push: { "comments": newComment._id } }, { new: true }).exec(function (err, doc) {
+                if (err) {
+                    console.log(err);
+                }
+                else {
+                    console.log("Added: ", doc);
+                    res.send(doc);
+                }
+            });
+        }
+    });
+});
+
+//Remove a comment
+router.post("/uncomment/:id", function (req, res) {
+    Commet.findOneAndUpdate({ _id: req.params.id }, { saved : false })
+        .exec(function (err, doc) {
+            if (err) {
+                console.log(err);
             }
             else {
-                res.json(found);
+                console.log("Article Removed");
             }
         });
-    });
+    res.redirect("/saved");
+});
 
-    //Sets saved to true for article
-    app.post("/save/:id", function (req, res) {
-        Article.findOneAndUpdate({ "_id": req.params.id }, { "saved": true }, function (error, found) {
-            if (error) {
-                console.log(error);
-            }
-            else {
-                console.log("Changed: ", found)
-            }
-        });
-    });
-
-};
+module.exports = router;

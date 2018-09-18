@@ -1,24 +1,41 @@
 //Initialize materialize javascript elements
 M.AutoInit();
 
-// //Wait for document to load
-// document.addEventListener("DOMContentLoaded", function () {
-
-//     //Initialize sidenav
-//     var elems = document.querySelectorAll(".sidenav");
-//     var instances = M.Sidenav.init(elems, {
-//         //sidenave options
-//         draggable: true
-//     });
-// });
+$('.modal').modal();
 
 $(document).ready(function () {
-    var API = {
-        getArticles: function () {
-            $.ajax({
-                url: "/scrape",
-                type: "GET"
-            });
+
+    $(".clearBtn").on("click", function() {
+        $.ajax({
+            type: "DELETE",
+            url: "/delete"
+        });
+        if (window.location.href = "/") {
+        window.location.reload();
         }
-    };
+        else {
+            window.location.href = "/";
+        }
+    });
+
+    $(".saveBtn").on("click", function() {
+        var id = $(this).attr("data-id");
+        $.ajax({
+            type: "POST",
+            url: "/save/" + id
+        });
+        $('#modal1').modal('open');
+    });
+
+    $(".removeSaveBtn").on("click", function() {
+        var id = $(this).attr("data-id");
+        $.ajax({
+            type: "POST",
+            url: "/removesaved/" + id
+        });
+        window.location.reload();
+    });
+
+    
+
 });

@@ -1,0 +1,43 @@
+{{#if data}}
+
+<div class="row">
+  {{#each data}}
+  <div class="col s12  m4 l3">
+    <div class="card" style="height:546px">
+      <div class="card-image">
+        <img src="{{this.photo}}">
+      </div>
+      <div class="card-content">
+        <h5>{{this.title}}</h5>
+        <p>{{this.description}}</p>
+
+        <!-- Link Icon -->
+        <a href="{{this.link}}" class="btn-floating waves-effect waves-light" target="__blank"><i class="material-icons">insert_link</i>
+        </a>
+        <!-- Comments Modal Trigger -->
+        <a class="btn-floating waves-effect waves-light btn modal-trigger" href="#modal3"><i class="material-icons">insert_comment</i></a>
+
+        <!-- Remove Save Icon -->
+        <a class="btn-floating waves-effect waves-light red removeSaveBtn" data-id="{{this.id}}"><i class="material-icons">add</i></a>
+
+        <!-- Comments Modal Structure -->
+        <div id="modal3" class="modal">
+          <div class="modal-content">
+            <h4>Modal Header</h4>
+            <p>A bunch of text</p>
+          </div>
+          <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  {{/each}}
+</div>
+
+{{else}}
+<h1>No Articles Saved!</h1>
+{{/if}}
