@@ -16,16 +16,17 @@ var Article = require("./models/Article.js");
 var port = process.env.PORT || 3000;
 var app = express();
 
-// Routes
-var routes = require("./routes/article-routes.js");
-app.use("/", routes);
-
 //Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
 }));
 app.use(express.static("public"));
+
+// Routes
+var routes = require("./routes/article-routes.js");
+app.use("/", routes);
+
 
 // Handlebars
 app.engine(

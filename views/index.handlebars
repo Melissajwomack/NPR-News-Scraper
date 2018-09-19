@@ -15,7 +15,8 @@
         <a href="{{this.link}}" class="btn-floating waves-effect waves-light" target="__blank"><i class="material-icons">insert_link</i>
         </a>
         <!-- Comments Modal Trigger -->
-        <a class="btn-floating waves-effect waves-light btn modal-trigger commentBtn" href="#modal3"><i class="material-icons">insert_comment</i></a>
+        <a data-id="{{this.id}}" class="btn-floating waves-effect waves-light btn modal-trigger commentBtn" href="#modal3"><i
+            class="material-icons">insert_comment</i></a>
 
         <!-- Save Icon -->
         <a class="btn-floating waves-effect waves-light red saveBtn" data-id="{{this.id}}"><i class="material-icons">add</i></a>
@@ -23,21 +24,23 @@
         <!-- Comments Modal Structure -->
         <div id="modal3" class="modal">
           <div class="modal-content">
-            <h4>{{this.title}}</h4>
-            <p>{{this.comments.comment}}</p>
+            <p><strong>{{this.title}}</strong></p>
+            {{#each this.comment}}
+            <p>{{@index}}</p>
             <!-- Remove Comment Button -->
-            <a class="btn-floating waves-effect waves-light red saveCommentBtn" data-id="{{this.id}}"><i class="material-icons">close</i></a>
+            <a class="btn-floating waves-effect waves-light" data-id="{{this.id}}"><i class="material-icons">close</i></a>
+            {{/each}}
           </div>
 
           <div class="modal-footer">
-            
+            <textarea id="new-comment-field" type="text"></textarea>
             <!-- Save Comment Button -->
-            <a class="btn-floating waves-effect waves-light red saveCommentBtn" data-id="{{this.id}}"><i class="material-icons">add</i></a>
+            <a class="btn-flat waves-effect waves-light" id="addCommentBtn" data-id="{{this.id}}">Add Comment</a>
 
             <!-- Close Modal Button -->
             <a href="#!" class="modal-close waves-effect waves-green btn-flat">Done</a>
 
-            <textarea id="new-comment-field"></textarea>
+
           </div>
         </div>
 

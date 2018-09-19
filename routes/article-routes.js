@@ -2,9 +2,8 @@ var express = require('express');
 var router = express.Router();
 var request = require("request");
 var cheerio = require("cheerio");
-var Comment = require("../models/Comment.js");
+var Comments = require("../models/Comment.js");
 var Article = require("../models/Article.js");
-
 
 //Scrape data from NPR
 router.get("/scrape", function (req, res) {
@@ -45,17 +44,17 @@ router.get("/scrape", function (req, res) {
 //Render data from database on index page
 router.get("/", (req, res) => {
     Article.find({})
-    .populate("comments")
-    .exec(function (error, found) {
-        if (error) {
-            console.log(error);
-        }
-        else {
-            res.render("index", {
-                data: found
-            });
-        }
-    });
+        .populate("comments")
+        .exec(function (error, found) {
+            if (error) {
+                console.log(error);
+            }
+            else {
+                res.render("index", {
+                    data: found
+                });
+            }
+        });
 });
 
 //Clear database off all articles
@@ -114,40 +113,41 @@ router.post("/removesaved/:id", function (req, res) {
 
 //Get article comments by ObjectId
 router.get("/articles/:id", function (req, res) {
-    Article.findOne({ _id: req.params.id }).populate("comments").exec(function (error, doc) {
-        if (error) {
-            console.log(error);
-        }
-        else {
-            res.json(doc);
-        }
-    });
+    Article.findOne({ _id: req.params.id })
+        .populate("comments")
+        .then(function (res) {
+            res.json(res);
+        })
+        .catch(function (err) {
+            res.json(err);
+        })
 });
 
 //Make a new comment
 router.post("/comment/:id", function (req, res) {
-    var newComment = new Comment(req.body.comment);
-    newComment.save(function (error, newComment) {
-        if (error) {
-            console.log(error);
-        }
-        else {
-            Article.findOneAndUpdate({ _id: req.params.id }, { $push: { "comments": newComment._id } }, { new: true }).exec(function (err, doc) {
+    console.log(req.params.id);
+    Comments.create(req.body)
+        .then(function (data) {
+            Article.findOneAndUpdate({ _id: req.params.id }, { $push: { comments: data._id } }, { new: true }, function(err, data) {
                 if (err) {
                     console.log(err);
                 }
                 else {
-                    console.log("Added: ", doc);
-                    res.send(doc);
+                    console.log(data);
                 }
             });
-        }
-    });
+        })
+        .then(function (res) {
+            res.json(res);
+        })
+        .catch(function (err) {
+            res.json(err);
+        })
 });
 
 //Remove a comment
 router.post("/uncomment/:id", function (req, res) {
-    Commet.findOneAndUpdate({ _id: req.params.id }, { saved : false })
+    Commet.findOneAndUpdate({ _id: req.params.id }, { saved: false })
         .exec(function (err, doc) {
             if (err) {
                 console.log(err);
