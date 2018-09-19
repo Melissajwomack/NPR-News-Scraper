@@ -47,7 +47,7 @@ $(document).ready(function () {
 
     $(document).on("click", "#addCommentBtn", function () {
         var thisId = $(this).attr("data-id");
-        var userInput = $("#new-comment-field").val().toString();
+        var userInput = $(".new-comment-field").val().toString();
 
         $.ajax({
             method: "POST",
@@ -56,7 +56,7 @@ $(document).ready(function () {
                 comments: userInput
             }
         })
-        $("#new-comment-field").val("");
+        $(".new-comment-field").val("");
         location.reload();
     });
 
