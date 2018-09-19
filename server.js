@@ -4,14 +4,6 @@ var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
 var exphbs = require("express-handlebars");
 
-//Scrapping
-var cheerio = require("cheerio");
-var request = require("request");
-
-//Article and Comment models for mongodb
-var Comment = require("./models/Comment.js");
-var Article = require("./models/Article.js");
-
 //Initialize express
 var port = process.env.PORT || 3000;
 var app = express();
