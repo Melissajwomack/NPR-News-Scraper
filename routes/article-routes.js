@@ -2,8 +2,8 @@ var express = require('express');
 var router = express.Router();
 var request = require("request");
 var cheerio = require("cheerio");
-var Comments = require("../models/Comment.js");
-var Article = require("../models/Article.js");
+var Comments = require("../models/comment.js");
+var Article = require("../models/article.js");
 
 //Scrape data from NPR
 router.get("/scrape", function (req, res) {
