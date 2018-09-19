@@ -56,8 +56,19 @@ $(document).ready(function () {
                 comments: userInput
             }
         })
-
         $("#new-comment-field").val("");
+        location.reload();
+    });
+
+    $(document).on("click", "#removeComment", function () {
+        var thisId = $(this).attr("data-id");
+
+        $.ajax({
+            method: "DELETE",
+            url: "/uncomment/" + thisId,
+        });
+
+        location.reload();
     });
 
 });

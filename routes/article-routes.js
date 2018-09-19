@@ -71,7 +71,9 @@ router.delete("/delete", (req, res) => {
 
 //Render saved articles on saved page
 router.get("/saved", (req, res) => {
-    Article.find({ saved: true }, function (error, found) {
+    Article.find({ saved: true })
+    .populate("comments")
+    .exec( function (error, found) {
         if (error) {
             console.log(error);
         }
@@ -125,7 +127,6 @@ router.get("/articles/:id", function (req, res) {
 
 //Make a new comment
 router.post("/comment/:id", function (req, res) {
-    console.log(req.params.id);
     Comments.create(req.body)
         .then(function (data) {
             Article.findOneAndUpdate({ _id: req.params.id }, { $push: { comments: data._id } }, { new: true }, function(err, data) {
@@ -146,17 +147,17 @@ router.post("/comment/:id", function (req, res) {
 });
 
 //Remove a comment
-router.post("/uncomment/:id", function (req, res) {
-    Commet.findOneAndUpdate({ _id: req.params.id }, { saved: false })
+router.delete("/uncomment/:id", function (req, res) {
+    Comments.findOneAndRemove({ _id: req.params.id })
         .exec(function (err, doc) {
             if (err) {
                 console.log(err);
             }
             else {
                 console.log("Article Removed");
+                console.log(doc);
             }
         });
-    res.redirect("/saved");
 });
 
 module.exports = router;

@@ -25,10 +25,13 @@
         <div id="modal3" class="modal">
           <div class="modal-content">
             <p><strong>{{this.title}}</strong></p>
-            {{#each this.comment}}
-            <p>{{@index}}</p>
-            <!-- Remove Comment Button -->
-            <a class="btn-floating waves-effect waves-light" data-id="{{this.id}}"><i class="material-icons">close</i></a>
+            {{#each this.comments}}
+            <hr>
+            <p>{{this.comments}}
+              <!-- Remove Comment Button -->
+              <a class="btn-flat waves-effect waves-light" id="removeComment" data-id="{{this.id}}" style="float:right!important"><i
+                  class="material-icons">close</i></a>
+            </p>
             {{/each}}
           </div>
 
