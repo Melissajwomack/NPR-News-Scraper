@@ -15,14 +15,14 @@
         <a href="{{this.link}}" class="btn-floating waves-effect waves-light" target="__blank"><i class="material-icons">insert_link</i>
         </a>
         <!-- Comments Modal Trigger -->
-        <a data-id="{{this.id}}" class="btn-floating waves-effect waves-light btn modal-trigger commentBtn" href="#modal3"><i
+        <a data-id="{{this.id}}" class="btn-floating waves-effect waves-light btn modal-trigger commentBtn" href="#modal{{this.id}}"><i
             class="material-icons">insert_comment</i></a>
 
         <!-- Save Icon -->
         <a class="btn-floating waves-effect waves-light red saveBtn" data-id="{{this.id}}"><i class="material-icons">add</i></a>
 
         <!-- Comments Modal Structure -->
-        <div id="modal3" class="modal">
+        <div id="modal{{this.id}}" class="modal">
           <div class="modal-content">
             <p><strong>{{this.title}}</strong></p>
             {{#each this.comments}}
