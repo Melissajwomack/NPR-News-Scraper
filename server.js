@@ -5,7 +5,7 @@ var bodyParser = require("body-parser");
 var exphbs = require("express-handlebars");
 
 //Initialize express
-var port = process.env.PORT || 3000;
+var port = process.env.PORT;
 var app = express();
 
 //Middleware
@@ -30,14 +30,14 @@ app.engine(
 app.set("view engine", "handlebars");
 
 //DB config
-var dbURI = "mongodb://127.0.0.1:27017/mongoHeadlines";
+// var dbURI = "mongodb://127.0.0.1:27017/mongoHeadlines";
 
-if (process.env.MONGODB_URI) {
+// if (process.env.MONGODB_URI) {
     mongoose.connect(process.env.MONGODB_URI);
-}
-else {
-    mongoose.connect(dbURI)
-}
+// }
+// else {
+//     mongoose.connect(dbURI)
+// }
 
 //Grab mongoose db
 var db = mongoose.connection;
