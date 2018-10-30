@@ -1,4 +1,4 @@
-# News Stance
+# NPR News Scrapper
 
 ## About the App
 This is a web app that displays articles from NPR's website. The app includes links to the original article, a save article feature, and lets users write, delete, and view comments on the articles. 
