@@ -2,23 +2,14 @@
 
 <div class="row">
   {{#each data}}
-  <div class="col s12  m4 l3">
-    <div class="card" style="height:546px">
+  <div class="col s12  m6">
+    <div class="card" style="height:560px">
       <div class="card-image">
         <img src="{{this.photo}}">
       </div>
       <div class="card-content">
         <h5>{{this.title}}</h5>
         <p>{{this.description}}</p>
-
-        <!-- Link Icon -->
-        <a href="{{this.link}}" class="btn-floating waves-effect waves-light" target="__blank"><i class="material-icons">insert_link</i>
-        </a>
-        <!-- Comments Modal Trigger -->
-        <a class="btn-floating waves-effect waves-light btn modal-trigger commentBtn" href="#modal{{this.id}}"><i class="material-icons">insert_comment</i></a>
-
-        <!-- Remove Save Icon -->
-        <a class="btn-floating waves-effect waves-light red removeSaveBtn" data-id="{{this.id}}"><i class="material-icons">close</i></a>
 
         <!-- Comments Modal Structure -->
         <div id="modal{{this.id}}" class="modal">
@@ -42,11 +33,18 @@
             <!-- Close Modal Button -->
             <a href="#!" class="modal-close waves-effect waves-green btn-flat">Done</a>
 
-
           </div>
         </div>
 
       </div>
+      <!-- Link Icon -->
+      <a href="{{this.link}}" class="btn-floating waves-effect waves-light link-icon" target="__blank"><i class="material-icons">insert_link</i>
+      </a>
+      <!-- Comments Modal Trigger -->
+      <a class="btn-floating waves-effect waves-light btn modal-trigger commentBtn comment-icon" href="#modal{{this.id}}"><i class="material-icons">insert_comment</i></a>
+
+      <!-- Remove Save Icon -->
+      <a class="btn-floating waves-effect waves-light red removeSaveBtn save-icon" data-id="{{this.id}}"><i class="material-icons">close</i></a>
     </div>
   </div>
 

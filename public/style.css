@@ -1,3 +1,67 @@
+/*font 00356f
+    button 009984
+        background 6accbd*/
+
+/* body {
+    background-color: #f1a772;
+} */
+
+.save-icon, .link-icon, .comment-icon {
+    background-color: #f1a772!important;   
+}
+
+.sidenav li>a.btn, nav ul a.btn {
+    background-color: #f1a772!important;
+}
+
+nav {
+    margin-bottom: 5px;
+}
+
+.page-footer, nav, .sidenav {
+    background-color: #f1a772;
+}
+
+.page-footer {
+    padding: 5px 0 5px 0;
+}
+
 .modal {
     height: 40%!important;
+}
+
+.brand-logo, .save-icon, .link-icon, .comment-icon, .btn {
+    color: whitesmoke!important;
+}
+
+.brand-logo {
+    margin-left: 12px!important;
+    
+}
+
+li.active {
+    background-color: rgba(0,0,0,0)!important;
+}
+
+a.btn-floating.waves-effect {
+    bottom: 10px;
+    margin: 5px 30px 24px 30px;
+}
+
+.link-icon {
+    position: absolute;
+    right: 9em;
+    margin: 5px 30px 24px 30px;
+}
+
+.comment-icon {
+    position: absolute;
+    right: 5em;
+    margin: 5px 30px 24px 30px;
+}
+
+.save-icon {
+    position: absolute;
+    right: 1em;
+    margin: 5px 30px 24px 30px;
 }

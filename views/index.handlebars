@@ -2,8 +2,8 @@
 
 <div class="row">
   {{#each data}}
-  <div class="col s12  m4 l3">
-    <div class="card" style="height:546px">
+  <div class="col s12  m6 l4">
+    <div class="card" style="height:560px">
       <div class="card-image">
         <img src="{{this.photo}}">
       </div>
@@ -11,15 +11,6 @@
         <h5>{{this.title}}</h5>
         <p>{{this.description}}</p>
 
-        <!-- Link Icon -->
-        <a href="{{this.link}}" class="btn-floating waves-effect waves-light" target="__blank"><i class="material-icons">insert_link</i>
-        </a>
-        <!-- Comments Modal Trigger -->
-        <a data-id="{{this.id}}" class="btn-floating waves-effect waves-light btn modal-trigger commentBtn" href="#modal{{this.id}}"><i
-            class="material-icons">insert_comment</i></a>
-
-        <!-- Save Icon -->
-        <a class="btn-floating waves-effect waves-light red saveBtn" data-id="{{this.id}}"><i class="material-icons">add</i></a>
 
         <!-- Comments Modal Structure -->
         <div id="modal{{this.id}}" class="modal">
@@ -48,6 +39,16 @@
         </div>
 
       </div>
+      <!-- Link Icon -->
+      <a href="{{this.link}}" class="btn-floating waves-effect waves-light link-icon" target="__blank"><i class="material-icons">insert_link</i>
+      </a>
+      <!-- Comments Modal Trigger -->
+      <a data-id="{{this.id}}" class="btn-floating waves-effect waves-light btn modal-trigger commentBtn comment-icon"
+        href="#modal{{this.id}}"><i class="material-icons">insert_comment</i></a>
+
+      <!-- Save Icon -->
+      <a class="btn-floating waves-effect waves-light red saveBtn save-icon" data-id="{{this.id}}"><i class="material-icons">add</i></a>
+
     </div>
   </div>
   {{/each}}
