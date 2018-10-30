@@ -10,6 +10,10 @@ body {
     background-color: #f1a772!important;   
 }
 
+.sidenav {
+    background-color: whitesmoke!important;
+}
+
 .sidenav li>a.btn, nav ul a.btn {
     background-color: #f1a772!important;
 }
@@ -26,8 +30,25 @@ nav {
     padding: 5px 0 5px 0;
 }
 
+p>strong {
+    font-size: 22px;
+    font-weight: bolder;
+}
+
+hr + p {
+    line-height: 2.5rem!important;
+}
+
+#addCommentBtn, .modal-close {
+    border: 1px solid black;
+}
+
 .modal {
     height: 40%!important;
+}
+
+.modal, .modal-footer {
+    padding: 24px!important;
 }
 
 .brand-logo, .save-icon, .link-icon, .comment-icon, .btn {
