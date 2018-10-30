@@ -2,9 +2,9 @@
     button 009984
         background 6accbd*/
 
-/* body {
-    background-color: #f1a772;
-} */
+body {
+    font-family: 'Montserrat', sans-serif;
+}
 
 .save-icon, .link-icon, .comment-icon {
     background-color: #f1a772!important;   
