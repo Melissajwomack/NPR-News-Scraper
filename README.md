@@ -1,4 +1,4 @@
-# NPR News Scrapper
+# NPR News Scraper
 
 ## About the App
 Full stack web app that displays articles from NPR's website. The app includes links to the original article, a save article feature, and allows users to write, delete, and view comments on the articles. 
