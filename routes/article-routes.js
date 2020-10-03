@@ -11,15 +11,15 @@ router.get("/scrape", function (req, res) {
 
         var $ = cheerio.load(html);
 
-        $("article.item").each(function (i, element) {
+        $("article.item.has-image").each(function (i, element) {
 
             var result = {};
 
-            result.title = $(element).children("div.item-info").children("h2.title").children("a").text();
+            result.title = $(element).children("div.item-info-wrap").children("div.item-info").children("h2.title").children("a").text();
 
-            result.description = $(element).children("div.item-info").children("p.teaser").children("a").text();
+            result.description = $(element).children("div.item-info-wrap").children("div.item-info").children("p.teaser").children("a").text();
 
-            result.link = $(element).children("div.item-info").children("h2.title").children("a").attr("href");
+            result.link = $(element).children("div.item-info-wrap").children("div.item-info").children("h2.title").children("a").attr("href");
 
             result.photo = $(element).children("div.item-image").children("div.imagewrap").children("a").children("img").attr("src");
 
