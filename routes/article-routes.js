@@ -59,7 +59,7 @@ router.get("/", (req, res) => {
 
 //Clear database off all articles
 router.delete("/delete", (req, res) => {
-    Article.remove({}, function (error) {
+    Article.deleteMany({}, function (error) {
         if (error) {
             console.log(error);
         }
