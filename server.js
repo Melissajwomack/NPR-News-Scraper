@@ -30,13 +30,19 @@ app.engine(
 app.set("view engine", "handlebars");
 
 //DB config
-var dbURI = "mongodb://127.0.0.1:27017/mongoHeadlines";
+var dbURI = "mongodb://localhost:27017/mongoHeadlines";
 
 if (process.env.MONGODB_URI) {
-    mongoose.connect(process.env.MONGODB_URI);
+    mongoose.connect(process.env.MONGODB_URI, { 
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    });
 }
 else {
-    mongoose.connect(dbURI)
+    mongoose.connect(dbURI, { 
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    })
 }
 
 //Grab mongoose db
