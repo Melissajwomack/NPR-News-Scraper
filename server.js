@@ -39,8 +39,6 @@ var user = mdbkey.mdburi.user;
 var pw = mdbkey.mdburi.pw;
 var db = mdbkey.mdburi.db;
 var mongodburi = `mongodb+srv://${user}:${pw}@${db}.oepzq.mongodb.net/Cluster0?retryWrites=true&w=majority`;
-console.log(mongodburi);
-
 
 if (process.env.MONGODB_URI) {
     mongoose.set('useCreateIndex', true);
