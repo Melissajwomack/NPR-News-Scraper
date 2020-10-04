@@ -1,4 +1,5 @@
 //Dependencies
+require('dotenv').config()
 var express = require("express");
 var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
@@ -33,7 +34,13 @@ app.engine(
 app.set("view engine", "handlebars");
 
 //DB config
-var dbURI = "mongodb+srv://me:076269mw@cluster0.oepzq.mongodb.net/Cluster0?retryWrites=true&w=majority";
+var mdbkey = require("./key.js");
+var user = mdbkey.mdburi.user;
+var pw = mdbkey.mdburi.pw;
+var db = mdbkey.mdburi.db;
+var mongodburi = `mongodb+srv://${user}:${pw}@${db}.oepzq.mongodb.net/Cluster0?retryWrites=true&w=majority`;
+console.log(mongodburi);
+
 
 if (process.env.MONGODB_URI) {
     mongoose.set('useCreateIndex', true);
@@ -44,7 +51,7 @@ if (process.env.MONGODB_URI) {
 }
 else {
     mongoose.set('useCreateIndex', true);
-    mongoose.connect(dbURI, { 
+    mongoose.connect(mongodburi, { 
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })
