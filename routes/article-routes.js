@@ -21,7 +21,7 @@ router.get("/scrape", function (req, res) {
 
             result.link = $(element).children("div.item-info-wrap").children("div.item-info").children("h2.title").children("a").attr("href");
 
-            result.photo = $(element).children("div.item-image").children("div.imagewrap").children("a").children("img").attr("src");
+            result.photo = $(element).children("div.item-image").children("div.imagewrap").children("a").children("picture").children("img").attr("src");
 
             var newArticle = new Article(result);
 
