@@ -36,7 +36,7 @@ app.set("view engine", "handlebars");
 //DB config
 var mdbkey = require("./key.js");
 var pw = mdbkey.mdburi.pw;
-var mongodburi = `mongodb://me:${pw}@cluster0-shard-00-00.oepzq.mongodb.net:27017,cluster0-shard-00-01.oepzq.mongodb.net:27017,cluster0-shard-00-02.oepzq.mongodb.net:27017/cluster0?ssl=true&replicaSet=atlas-vfpiuh-shard-0&authSource=admin&retryWrites=true&w=majority`;
+var mongodburi = `mongodb://me:${pw}@cluster0-shard-00-00.oepzq.mongodb.net:27017,cluster0-shard-00-01.oepzq.mongodb.net:27017,cluster0-shard-00-02.oepzq.mongodb.net:27017/Cluster0?ssl=true&replicaSet=atlas-vfpiuh-shard-0&authSource=admin&retryWrites=true&w=majority`;
 
 if (process.env.MONGODB_URI) {
     mongoose.set('useCreateIndex', true);
