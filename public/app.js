@@ -10,12 +10,9 @@ $(document).ready(function () {
             type: "DELETE",
             url: "/delete"
         });
-        if (window.location.href = "/") {
-            window.location.reload();
-        }
-        else {
+        setTimeout(function(){
             window.location.href = "/";
-        }
+        }, 500);
     });
 
     $(".saveBtn").on("click", function () {

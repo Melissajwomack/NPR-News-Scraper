@@ -35,7 +35,7 @@ app.set("view engine", "handlebars");
 
 //DB config
 var mdbkey = require("./key.js");
-var user = mdbkey.mdburi.user;
+var user = mdbkey.mdburi.user;w
 var pw = mdbkey.mdburi.pw;
 var db = mdbkey.mdburi.db;
 var mongodburi = `mongodb+srv://${user}:${pw}@${db}.oepzq.mongodb.net/Cluster0?retryWrites=true&w=majority`;

@@ -37,8 +37,7 @@ router.get("/scrape", function (req, res) {
                 }
             });
         });
-        console.log(error);
-        console.log(response);
+
         res.redirect("/");
     });
 });
