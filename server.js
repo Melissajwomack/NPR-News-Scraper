@@ -38,7 +38,7 @@ var mdbkey = require("./key.js");
 var user = mdbkey.mdburi.user;
 var pw = mdbkey.mdburi.pw;
 var db = mdbkey.mdburi.db;
-var mongodburi = `mongodb+srv://${user}:${pw}@${db}.oepzq.mongodb.net/Cluster0?retryWrites=true&w=majority`;
+var mongodburi = `mongodb://me:${pw}@cluster0-shard-00-00.oepzq.mongodb.net:27017,cluster0-shard-00-01.oepzq.mongodb.net:27017,cluster0-shard-00-02.oepzq.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-vfpiuh-shard-0&authSource=admin&retryWrites=true&w=majority`;
 
 if (process.env.MONGODB_URI) {
     mongoose.set('useCreateIndex', true);
